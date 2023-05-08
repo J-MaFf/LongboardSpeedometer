@@ -73,7 +73,7 @@ int getRevolutions(bool hallSensorValue, int count){
     // Update the old hall sensor value
     hallSensorValueOld = hallSensorValue;
   }
-
+  return count;
 }
 
 /**
