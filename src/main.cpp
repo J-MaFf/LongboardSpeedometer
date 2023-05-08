@@ -63,21 +63,17 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
  * @return The count of full rotations
 */
 int getRevolutions(bool hallSensorValue, int count){
-    // Magnet precence outputs 0, no magnet outputs 1
-    if (hallSensorValue == 0 && hallSensorValueOld == 1){
-        bool tmp = hallSensorValue;
-        hallSensorValueOld = hallSensorValue;
-        hallSensorValue = tmp;        
-        count++;
+  // Check if the hall sensor value has changed
+  if (hallSensorValue != hallSensorValueOld){
+    // Check if the hall sensor value is high
+    if (hallSensorValue == 1){
+      // Increment count
+      count++;
     }
-    if (hallSensorValue == 1 && hallSensorValueOld == 0){
-        bool tmp = hallSensorValue;
-        hallSensorValueOld = hallSensorValue;
-        hallSensorValue = tmp;        
-    }
-    Serial.print(count);
+    // Update the old hall sensor value
+    hallSensorValueOld = hallSensorValue;
+  }
 
-    return count;
 }
 
 /**
