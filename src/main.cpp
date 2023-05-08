@@ -66,7 +66,7 @@ int getRevolutions(bool hallSensorValue, int count){
   // Check if the hall sensor value has changed
   if (hallSensorValue != hallSensorValueOld){
     // Check if the hall sensor value is high
-    if (hallSensorValue == 1){
+    if (hallSensorValue == 0){
       // Increment count
       count++;
     }
@@ -84,7 +84,6 @@ int getRevolutions(bool hallSensorValue, int count){
 */
 
 double getRpm(int count, double seconds){
-    
   double rpm = (count / seconds) * 60;
   return rpm;
 }
@@ -110,11 +109,13 @@ double getDistance(double speed, double seconds){
   double distance = speed * seconds;
   return distance;
 }
-
+/**
+ * @brief setup is a method that runs once when the program starts
+ * 
+ * @return void
+ * 
+*/
 void setup() {
-
-  // enable the serial monitor
-  Serial.begin(9600);
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
 
@@ -122,11 +123,21 @@ void setup() {
   pinMode(hallSensor, INPUT);
 }
 
+/**
+ * @brief loop is a method that runs over and over again
+ * This method is used to calculate and update the LCD
+ * screen with the current speed, time elapsed, RPM and #
+ * of rotations. Rpm and # of rotations are only calculated
+ * every 2 seconds to reduce the amount of calculations.
+ * 
+ * @return void
+ * 
+*/
 void loop() {
 seconds = millis() / 1000;
 //  while untill 5 seconds have passed
 
-bool hallSensorValue = digitalRead(hallSensor);
+hallSensorValue = digitalRead(hallSensor);
 count = getRevolutions(hallSensorValue, count);
   
 
