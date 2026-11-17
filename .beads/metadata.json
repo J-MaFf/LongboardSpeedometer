@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "embedded",
+  "dolt_database": "LongboardSpeedometer",
+  "project_id": "f5d478f4-2eda-496a-9a3e-4cafa7c28cff"
+}
